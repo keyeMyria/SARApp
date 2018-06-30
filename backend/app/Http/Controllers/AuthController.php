@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\SignUpRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
 {
@@ -61,10 +62,58 @@ class AuthController extends Controller
 
         Mail::to($user->email)->send(new VerifyEmail($user));
 
-        return response()->json(['data' => 'We sent you an activation code. Check your email and click on the link to verify.']);
+        return response()->json([
+            
+            'data' => 'We sent you an activation code. Check your email and click on the link to verify.'
+
+            ]);
 
      }
 
+    /*
+     *
+     */ 
+    public function verifyUser() {
+
+        $user = User::where('email', request('email'))->first();
+
+        $verifyUser = VerifyUser::where('token', request('token'))->first();
+
+        if(isset($verifyUser)){
+
+            if(!$user->verified) {
+
+                $user->verified = 1;
+                $user->save();
+                
+                VerifyUser::where('token', request('token'))->delete();
+
+                return response()->json([
+
+                    'data' => "Your e-mail is verified. You can now login."
+
+                ], Response::HTTP_OK);
+
+            } else {
+
+                return response()->json([
+                    'error' => 'Sorry the token sent to  your email has already expired.'
+
+                ], Response::HTTP_NOT_FOUND);
+
+            }
+
+        }else{
+
+            return response()->json([
+
+                'error' => 'Sorry your email cannot be identified. It may already been verified or the email doesn\'t exist.'
+
+            ], Response::HTTP_NOT_FOUND);
+            
+        }
+
+    }
     /**
      * Get the authenticated User.
      *
