@@ -3,7 +3,7 @@
 
 Click on the button below to verify your account.
 
-@component('mail::button', ['url' => '', 'color' => 'green'])
+@component('mail::button', ['url' => 'http://localhost:4200/user/verify?token='.$token.'&email='.$email, 'color' => 'green'])
 Verify
 @endcomponent
 

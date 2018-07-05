@@ -20,7 +20,7 @@ class AuthController extends Controller
      */
     public function __construct() {
 
-        $this->middleware('auth:api', ['except' => ['login', 'signup']]);
+        $this->middleware('auth:api', ['except' => ['login', 'signup', 'verifyUser']]);
 
     }
 
@@ -32,15 +32,38 @@ class AuthController extends Controller
     public function login() {
 
         $credentials = request(['email', 'password']);
+        return $credentials;
+        $user = User::where('email', request('email'))->first();
 
-        if (! $token = auth()->attempt($credentials)) {
+        if(request('action') != null && !$user) {
 
-            return response()->json(['error' => 'Unauthorized'], 401);
+            $user = new User;
+            $user->name = request('name');
+            $user->email = request('email');
+            $user->password = request('password');
+            $user->verified = '1';
+            $user->save();
 
         }
 
-        return $this->respondWithToken($token);
+        if($user){
 
+            if(!$user->verified ){
+
+                return response()->json(['error' => 'You need to confirm your account. We have sent you an activation code, please check your email.'], 401);
+            
+            }
+
+        }
+        
+
+        if (! $token = auth()->attempt($credentials)) {
+            
+            return response()->json(['error' => 'Email or password doesn\'t exist'], 401);
+        
+        }
+
+        return $this->respondWithToken($token);
     }
 
     /*
@@ -76,7 +99,7 @@ class AuthController extends Controller
     public function verifyUser() {
 
         $user = User::where('email', request('email'))->first();
-
+        
         $verifyUser = VerifyUser::where('token', request('token'))->first();
 
         if(isset($verifyUser)){
