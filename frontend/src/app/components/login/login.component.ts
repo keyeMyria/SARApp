@@ -3,7 +3,7 @@ import { AuthService as SocialAuth, FacebookLoginProvider, GoogleLoginProvider }
 import { Router } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 import { TokenService } from '../../Services/token.service';
-import { HttpClient } from '@angular/common/http';
+import { ApiService } from '../../Services/api.service';
 
 @Component({
   selector: 'app-login',
@@ -14,10 +14,10 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private router : Router,
-    private Auth: AuthService,
-    private SocialAuth: SocialAuth,
-    private Token: TokenService,
-    private http: HttpClient 
+    private Auth : AuthService,
+    private SocialAuth : SocialAuth,
+    private Token : TokenService,
+    private __apiService : ApiService
   ) { }
 
   public userForm = {
@@ -45,15 +45,13 @@ export class LoginComponent implements OnInit {
 
   public error = null;
 
-  private baseUrl = 'http://localhost:8000/api/auth';
-
   ngOnInit() {
 
   }
 
   onSubmit() {
 
-    this.http.post(`${this.baseUrl}/login`,this.userForm).subscribe( 
+    this.__apiService.login(this.userForm).subscribe( 
 
       data => this.handleResponse(data),
       error => this.handleError(error)
@@ -75,7 +73,7 @@ export class LoginComponent implements OnInit {
         this.socialform.email = userData.email;
         this.socialform.password = '123456';
         this.socialform.action = 'social';
-        this.http.post(`${this.baseUrl}/login`, this.socialform).subscribe( 
+        this.__apiService.login(this.socialform).subscribe( 
 
           data => this.handleResponse(data),
           error => this.handleError(error),
@@ -97,7 +95,7 @@ export class LoginComponent implements OnInit {
         this.socialform.email = userData.email;
         this.socialform.password = '123456';
         this.socialform.action = 'social';
-        this.http.post(`${this.baseUrl}/login`, this.socialform).subscribe( 
+        this.__apiService.login(this.socialform).subscribe( 
 
           data => this.handleResponse(data),
           error => this.handleError(error),

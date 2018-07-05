@@ -16,6 +16,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './Services/api.service';
 import { TokenService } from './Services/token.service';
 import { RegisterComponent } from './components/register/register.component';
+import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
 @NgModule({
@@ -25,6 +27,8 @@ import { RegisterComponent } from './components/register/register.component';
     LoginComponent,
     HomeComponent,
     RegisterComponent,
+    VerifyEmailComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

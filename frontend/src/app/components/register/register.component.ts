@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { ApiService } from '../../Services/api.service';
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -10,7 +11,7 @@ export class RegisterComponent implements OnInit {
 
   constructor(
     private route : Router,
-    private http : HttpClient
+    private __apiService : ApiService
   ) { }
 
   ngOnInit() {
@@ -27,11 +28,9 @@ export class RegisterComponent implements OnInit {
 
   public error = [];
 
-  private baseUrl = 'http://localhost:8000/api/auth';
-
   onSubmit() {
 
-    return this.http.post(`${this.baseUrl}/signup`,this.form).subscribe(
+    return this.__apiService.register(this.form).subscribe(
 
       data => this.handleResponse(data),
       error => this.handleError(error)
@@ -41,13 +40,13 @@ export class RegisterComponent implements OnInit {
   }
 
   handleResponse(data) {
-
+    console.log(data);
     this.route.navigateByUrl('login');
 
   }
 
   handleError(error) {
-
+    console.log(error);
     this.error = error.error.errors;
     
   }
