@@ -11,10 +11,14 @@
       </ul>
       <!--  -->
       <div class="tab-content">
+          
           <div class="tab-pane active" id="employer-login">
             <div class="card">
               <div class="card-header text-center">Employer Login</div>
               <div class="card-body">
+                <div class="alert alert-danger text-center" [hidden]="!error">
+                    {{error}}
+                </div>
                 <form #userForm=ngForm (ngSubmit)="onSubmit()">
 
                   <div class="form-group row">
