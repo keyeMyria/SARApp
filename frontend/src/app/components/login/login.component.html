@@ -1,0 +1,94 @@
+<div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <ul class="nav nav-pills nav-justified">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="pill" href="#employer-login">Employer</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="pill" href="#employee-login">Employee</a>
+          </li>
+      </ul>
+      <!--  -->
+      <div class="tab-content">
+          <div class="tab-pane active" id="employer-login">
+            <div class="card">
+              <div class="card-header text-center">Employer Login</div>
+              <div class="card-body">
+                <form #userForm=ngForm (ngSubmit)="onSubmit()">
+
+                  <div class="form-group row">
+                    <label for="inputEmail3" class="col-md-4 col-form-label text-md-right">Email</label>
+                    <div class="col-md-6">
+                      <input type="email" name="email" class="form-control" id="inputEmail3" placeholder="Email" required autofocus [(ngModel)]="userForm.email">
+                    </div>
+                    
+                  </div>
+
+                  <div class="form-group row">
+                    <label for="inputPassword3" class="col-md-4 col-form-label text-md-right">Password</label>
+                    <div class="col-md-6">
+                      <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Password" required [(ngModel)]="userForm.password">
+                    </div>
+                  </div>
+
+                  <div class="form-group row mb-0">
+                    <div class="col-md-8 offset-md-4">
+                      <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Login</button>
+                      <a class="btn btn-link" href="#"> Forgot Password</a>
+                    </div>
+                  </div>
+
+                </form>
+
+                <div class="or-seperator"><i>or</i></div>
+                <p class="text-center">Login with your social media account</p>
+                <div class="text-center social-btn">
+                  <a (click)="facebook()" class="btn btn-primary text-white"><i class="fa fa-facebook"></i>&nbsp; Facebook</a>
+                  <a (click)="google()" class="btn btn-danger text-white"><i class="fa fa-google"></i>&nbsp; Google</a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        <!--  -->
+        <div class="tab-pane" id="employee-login">
+          <div class="card">
+              <div class="card-header text-center">Employee Login</div>
+              <div class="card-body">
+                <form #employeeForm=ngForm (ngSubmit)="onEmpSubmit()">
+      
+                  <div class="form-group row">
+                    <label for="employeeID" class="col-md-4 col-form-label text-md-right">Employee ID</label>
+                    <div class="col-md-6">
+                      <input type="text" name="email" class="form-control" id="employeeID" placeholder="Employee ID..." required autofocus [(ngModel)]="employeeForm.employeeID">
+                    </div>
+                    
+                  </div>
+      
+      
+                  <div class="form-group row">
+                    <label for="employeePassword" class="col-md-4 col-form-label text-md-right">Password</label>
+                    <div class="col-md-6">
+                      <input type="password" name="password" class="form-control" id="employeePassword" placeholder="Password" required [(ngModel)]="employeeForm.password">
+                    </div>
+                  </div>
+      
+                  <div class="form-group row mb-0">
+                    <div class="col-md-8 offset-md-4">
+                      <button type="submit" class="btn btn-primary" [disabled]="!employeeForm.valid">Login</button>
+                      <!-- <a class="btn btn-link" href="#"> Forgot Password</a> -->
+                    </div>
+                  </div>
+      
+                </form>
+    
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+    </div>
+  </div>
+</div>

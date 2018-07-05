@@ -1,0 +1,30 @@
+.sara-font {
+    font-family: ARBONNIE;
+    font-size: 30pt;
+    color:#FFA726 !important;
+}
+
+.orange {
+    color:#FFA726;
+}
+
+.white {
+    color: #FFF;
+}
+
+.navbar-light {
+    background: none !important;
+}
+
+.nav-link {
+    /* color: #FFF !important; */
+    color: #000;
+}
+
+.nav-link:hover {
+    color: #FFA726 !important;
+}
+
+.fa.fa-navicon {
+    color: #FFA726 !important;
+}
