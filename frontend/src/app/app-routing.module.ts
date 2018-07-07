@@ -7,13 +7,17 @@ import { VerifyEmailComponent } from './components/verify-email/verify-email.com
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { IsLoggedOutService } from './Services/is-logged-out.service';
 import { IsLoggedInService } from './Services/is-logged-in.service';
+import { RequestResetComponent } from './components/password/request-reset/request-reset.component';
+import { ResponseResetComponent } from './components/password/response-reset/response-reset.component';
+import { HttpModule } from '@angular/http';
+import { NgProgressModule } from '@ngx-progressbar/core';
+import { NgProgressHttpModule } from '@ngx-progressbar/http';
 
 
 const appRoutes: Routes = [
   {
     path: '',
-    component: HomeComponent,
-    canActivate: [IsLoggedOutService]
+    component: HomeComponent
   },
   {
     path: 'login',
@@ -34,13 +38,26 @@ const appRoutes: Routes = [
     path: 'dashboard',
     component: DashboardComponent,
     canActivate: [IsLoggedInService]
-  }
+  },
+  {
+    path: 'request-password-reset',
+    component: RequestResetComponent,
+    canActivate: [IsLoggedOutService]
+  },
+  {
+    path: 'response-password-reset',
+    component: ResponseResetComponent,
+    canActivate: [IsLoggedOutService]
+  },
 
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    HttpModule,
+    NgProgressModule.forRoot(),
+    NgProgressHttpModule
   ],
   declarations: [],
   exports: [RouterModule]

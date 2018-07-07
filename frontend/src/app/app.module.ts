@@ -4,12 +4,14 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './/app-routing.module';
 
+import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { PagesModule } from './modules/pages.module';
+import { HttpModule } from '@angular/http';
+import { NgProgressModule } from '@ngx-progressbar/core';
+import { NgProgressHttpModule } from '@ngx-progressbar/http';
 
 import { SocialLoginModule, AuthServiceConfig, GoogleLoginProvider, FacebookLoginProvider } from "angular-6-social-login";
-import { HttpClientModule } from '@angular/common/http';
-
 
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
@@ -24,6 +26,9 @@ import { TokenService } from './Services/token.service';
 import { IsLoggedInService } from './Services/is-logged-in.service';
 import { IsLoggedOutService } from './Services/is-logged-out.service';
 import { UserService } from './Services/user.service';
+import { RequestResetComponent } from './components/password/request-reset/request-reset.component';
+import { ResponseResetComponent } from './components/password/response-reset/response-reset.component';
+
 
 
 @NgModule({
@@ -35,6 +40,8 @@ import { UserService } from './Services/user.service';
     RegisterComponent,
     VerifyEmailComponent,
     DashboardComponent,
+    RequestResetComponent,
+    ResponseResetComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +49,10 @@ import { UserService } from './Services/user.service';
     FormsModule,
     PagesModule,
     SocialLoginModule,
-    HttpClientModule
+    HttpClientModule,
+    NgProgressModule,
+    NgProgressHttpModule,
+    HttpModule
   ],
   providers: [
     ApiService,
