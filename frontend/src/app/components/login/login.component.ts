@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../Services/auth.service';
 import { TokenService } from '../../Services/token.service';
 import { ApiService } from '../../Services/api.service';
+import { UserService } from '../../Services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -17,10 +18,11 @@ export class LoginComponent implements OnInit {
     private Auth : AuthService,
     private SocialAuth : SocialAuth,
     private Token : TokenService,
-    private __apiService : ApiService
+    private __apiService : ApiService,
+    private _user : UserService
   ) { }
 
-  public userForm = {
+  public form = {
 
     email: null,
     password: null
@@ -51,7 +53,7 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
 
-    this.__apiService.login(this.userForm).subscribe( 
+    this.__apiService.login(this.form).subscribe( 
 
       data => this.handleResponse(data),
       error => this.handleError(error)
@@ -111,6 +113,8 @@ export class LoginComponent implements OnInit {
     this.Token.handle(data.access_token);
     this.Auth.changeAuthStatus(true);
     this.router.navigateByUrl('/dashboard');
+    this._user.handle(data.user, data.email);
+
   }
 
   handleError(error){

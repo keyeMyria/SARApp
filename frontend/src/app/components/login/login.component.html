@@ -19,12 +19,12 @@
                 <div class="alert alert-danger text-center" [hidden]="!error">
                     {{error}}
                 </div>
-                <form #userForm=ngForm (ngSubmit)="onSubmit()">
+                <form #loginForm=ngForm (ngSubmit)="onSubmit()">
 
                   <div class="form-group row">
                     <label for="inputEmail3" class="col-md-4 col-form-label text-md-right">Email</label>
                     <div class="col-md-6">
-                      <input type="email" name="email" class="form-control" id="inputEmail3" placeholder="Email" required autofocus [(ngModel)]="userForm.email">
+                      <input type="email" name="email" class="form-control" id="inputEmail3" placeholder="Email" required [(ngModel)]="form.email">
                     </div>
                     
                   </div>
@@ -32,13 +32,13 @@
                   <div class="form-group row">
                     <label for="inputPassword3" class="col-md-4 col-form-label text-md-right">Password</label>
                     <div class="col-md-6">
-                      <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Password" required [(ngModel)]="userForm.password">
+                      <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Password" required [(ngModel)]="form.password">
                     </div>
                   </div>
 
                   <div class="form-group row mb-0">
                     <div class="col-md-8 offset-md-4">
-                      <button type="submit" class="btn btn-primary" [disabled]="!userForm.valid">Login</button>
+                      <button type="submit" class="btn btn-primary" [disabled]="!loginForm.valid">Login</button>
                       <a class="btn btn-link" href="#"> Forgot Password</a>
                     </div>
                   </div>

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Model\User;
+use App\User;
 use App\Mail\VerifyEmail;
 use App\Model\VerifyUser;
 use App\Http\Controllers\Controller;
@@ -32,7 +32,7 @@ class AuthController extends Controller
     public function login() {
 
         $credentials = request(['email', 'password']);
-        return $credentials;
+
         $user = User::where('email', request('email'))->first();
 
         if(request('action') != null && !$user) {
@@ -48,10 +48,10 @@ class AuthController extends Controller
 
         if($user){
 
-            if(!$user->verified ){
+            if(!$user->verified){
 
                 return response()->json(['error' => 'You need to confirm your account. We have sent you an activation code, please check your email.'], 401);
-            
+
             }
 
         }
@@ -186,8 +186,9 @@ class AuthController extends Controller
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
-            'user' => auth()->user()->name
-
+            'user' => auth()->user()->name,
+            'email' => auth()->user()->email
+            
         ]);
 
     }

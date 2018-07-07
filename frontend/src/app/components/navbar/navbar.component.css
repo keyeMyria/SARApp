@@ -25,6 +25,19 @@
     color: #FFA726 !important;
 }
 
-.fa.fa-navicon {
+.fa.fa-navicon, .fa.fa-user {
     color: #FFA726 !important;
+}
+
+.account-info {
+    width: 305px;
+    padding-bottom: 0px;
+}
+
+p.text-left {
+    word-wrap: break-word;
+}
+
+a.btn-block {
+    border-radius: 0;
 }
