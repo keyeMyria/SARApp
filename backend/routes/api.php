@@ -15,4 +15,5 @@ Route::group([
     Route::post('sendPasswordResetLink', 'ResetPasswordController@sendEmail');
     Route::post('resetPassword', 'ChangePasswordController@process');
     Route::post('/user/verify', 'AuthController@verifyUser');
+    Route::apiResource('user', 'UserController');
 });

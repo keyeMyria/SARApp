@@ -21,6 +21,10 @@
     color: #000;
 }
 
+a.active {
+    color: #FFA726 !important;
+}
+
 .nav-link:hover {
     color: #FFA726 !important;
 }

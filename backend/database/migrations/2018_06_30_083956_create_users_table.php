@@ -21,7 +21,7 @@ class CreateUsersTable extends Migration
             $table->string('password');
             $table->boolean('verified')->default(false);
             $table->integer('role_id')->unsigned()->default(2);
-
+            
             $table->rememberToken();
             $table->timestamps();
             

@@ -1,18 +1,25 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { LoginComponent } from './components/login/login.component';
-import { HomeComponent } from './components/home/home.component';
-import { RegisterComponent } from './components/register/register.component';
-import { VerifyEmailComponent } from './components/verify-email/verify-email.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { IsLoggedOutService } from './Services/is-logged-out.service';
-import { IsLoggedInService } from './Services/is-logged-in.service';
-import { RequestResetComponent } from './components/password/request-reset/request-reset.component';
-import { ResponseResetComponent } from './components/password/response-reset/response-reset.component';
 import { HttpModule } from '@angular/http';
+import { Routes, RouterModule } from '@angular/router';
+
+import { IsLoggedOutService } from './shared/Services/is-logged-out.service';
+import { IsLoggedInService } from './shared/Services/is-logged-in.service';
+
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { NgProgressHttpModule } from '@ngx-progressbar/http';
 
+// import { ProfileComponent } from './dashboard/user/view/profile/profile.component';
+// import { OverviewComponent } from './dashboard/user/view/overview/overview.component';
+
+
+import { HomeComponent } from './pages/home/home.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { VerifyEmailComponent } from './pages/process/verify-email/verify-email.component';
+import { RequestResetComponent } from './pages/process/password/request-reset/request-reset.component';
+import { ResponseResetComponent } from './pages/process/password/response-reset/response-reset.component';
+import { DashboardModule } from './dashboard/dashboard.module';
+// import { DashboardComponent } from './dashboard/user/view/dashboard.component';
 
 const appRoutes: Routes = [
   {
@@ -36,7 +43,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'dashboard',
-    component: DashboardComponent,
+    loadChildren: () => DashboardModule,
     canActivate: [IsLoggedInService]
   },
   {
@@ -49,7 +56,7 @@ const appRoutes: Routes = [
     component: ResponseResetComponent,
     canActivate: [IsLoggedOutService]
   },
-
+  
 ];
 
 @NgModule({
@@ -57,7 +64,8 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     HttpModule,
     NgProgressModule.forRoot(),
-    NgProgressHttpModule
+    NgProgressHttpModule,
+
   ],
   declarations: [],
   exports: [RouterModule]

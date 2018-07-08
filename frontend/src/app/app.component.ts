@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { AuthService } from './Services/auth.service';
+import { AuthService } from './shared/Services/auth.service';
 import { NgProgress } from '@ngx-progressbar/core'; 
+
 
 @Component({
   selector: 'app-root',
@@ -14,10 +15,15 @@ export class AppComponent {
   constructor(
 
     private auth: AuthService,
-    private progress: NgProgress
+    private progress: NgProgress,
 
   ){}
 
+
+  public user = {
+    name: null,
+    email: null
+  }
 
   ngOnInit() {
     this.progress.start();
