@@ -5,8 +5,15 @@ import { NgProgress } from '@ngx-progressbar/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  template: `
+              <ng-progress></ng-progress>
+              <app-navbar></app-navbar>
+              
+              <main>
+                  <router-outlet></router-outlet>
+              </main>
+            `,
+  styles: [],
 })
 export class AppComponent {
 

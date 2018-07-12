@@ -113,16 +113,10 @@ export class LoginComponent implements OnInit {
   handleResponse(data){
     this.Token.handle(data.access_token);
     this.Auth.changeAuthStatus(true);
-    this._user.handle(data.user);
     this.router.navigateByUrl('/dashboard');
   }
 
   handleError(error){
     this.error = error.error.error;
   }
-
-  // userData(name){
-  //    return name.replace(/ /g, "").toLowerCase();
-  // }
-
 }

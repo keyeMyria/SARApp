@@ -40,15 +40,12 @@ export class RegisterComponent implements OnInit {
   }
 
   handleResponse(data) {
-    console.log(data);
     this.route.navigateByUrl('login');
-
+    alert(data);
   }
 
   handleError(error) {
-    console.log(error);
     this.error = error.error.errors;
-    
   }
 
 

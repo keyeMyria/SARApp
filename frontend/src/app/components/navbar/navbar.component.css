@@ -18,7 +18,7 @@
 
 .nav-link {
     /* color: #FFF !important; */
-    color: #000;
+    color: #333;
 }
 
 a.active {
@@ -33,8 +33,8 @@ a.active {
     color: #FFA726 !important;
 }
 
-.account-info {
-    width: 305px;
+.account-info, .notifications {
+    width: 420px;
     padding-bottom: 0px;
 }
 
@@ -44,4 +44,8 @@ p.text-left {
 
 a.btn-block {
     border-radius: 0;
+}
+
+.account-info a {
+    text-decoration: none;
 }

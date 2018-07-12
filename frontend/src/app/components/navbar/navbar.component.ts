@@ -15,7 +15,6 @@ import { UserService } from 'src/app/shared/Services/user.service';
 
 export class NavbarComponent implements OnInit {
   private loggedIn : boolean;
-  private name : string;
 
   constructor(
     private auth: AuthService,
@@ -28,11 +27,6 @@ export class NavbarComponent implements OnInit {
     this.auth.authStatus.subscribe(
       value => this.loggedIn = value,
     );
-
-    this.auth.userstatus.subscribe(
-      value => this.name = value
-    );
-
   }
 
   logout(event: MouseEvent){
@@ -44,5 +38,7 @@ export class NavbarComponent implements OnInit {
     this.router.navigateByUrl('/login');
     
   }
+
+  
 
 }

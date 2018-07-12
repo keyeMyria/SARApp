@@ -15,15 +15,18 @@ export class TokenService {
   }
 
   set(token){
-    localStorage.setItem('token', token);
+    //localStorage.setItem('token', token);
+    sessionStorage.setItem('token', token);
   }
 
   get(){
-    return localStorage.getItem('token');
+    //return localStorage.getItem('token');
+    return sessionStorage.getItem('token');
   }
 
   remove(){
-    localStorage.removeItem('token');
+    //localStorage.removeItem('token');
+    sessionStorage.removeItem('token');
   }
 
   isValid(){

@@ -33,8 +33,8 @@ export class RequestResetComponent implements OnInit {
   }
 
   handleResponse(data){
-    console.log(data)
     this.form.email = null;
+    alert(data);
   }
 
   handleError(error) {

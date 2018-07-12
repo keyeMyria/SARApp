@@ -1,3 +1,75 @@
-<p>
-  profile works!
-</p>
+<div class="container-fluid">
+    <div class="row my-2">
+        <div class="col-lg-8 order-lg-2">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a href="" data-target="#profile" data-toggle="tab" class="nav-link active">
+                       <span class="fa fa-user"></span> Profile</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" data-target="#status" data-toggle="tab" class="nav-link">
+                       <span class="fa fa-line-chart"></span> Stats</a>
+                </li>
+                <li class="nav-item">
+                    <a href="" data-target="#history" data-toggle="tab" class="nav-link">
+                       <span class="fa fa-history"></span> Recent Activities</a>
+                </li>
+            </ul>
+            <div class="tab-content py-4">
+                <div class="tab-pane active" id="profile">
+                    <table class="table table-user-information">
+                        <tbody>
+
+                          <tr>
+                            <td>Name:</td>
+                            <td>{{name}}</td>
+                          </tr>
+
+                          <tr>
+                            <td>Email:</td>
+                            <td></td>
+                          </tr>
+
+                          <tr>
+                            <td>Address:</td>
+                            <td></td>
+                          </tr>
+                       
+                          <tr>
+                            <td>Gender:</td>
+                            <td></td>
+                          </tr>
+
+                          <tr>
+                            <td>Birth Date:</td>
+                            <td></td>
+                          </tr>
+
+                          <tr>
+                            <td>Phone Number</td>
+                            <td></td>
+                          </tr>
+                         
+                        </tbody>
+                      </table>
+                </div>
+                <div class="tab-pane" id="status">
+                    <!-- Status -->
+                    <p>status</p>
+                </div>
+                <div class="tab-pane" id="history">
+                    <!-- History -->
+                    <p>logs</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 order-lg-1 text-center">
+            <img src="//placehold.it/150" class="mx-auto img-fluid img-circle d-block" alt="avatar">
+            <h6 class="mt-2">Upload a different photo</h6>
+            <label class="custom-file">
+                <input type="file" id="file" class="custom-file-input">
+                <span class="custom-file-control btn btn-outline-secondary">Choose file</span>
+            </label>
+        </div>
+    </div>
+</div>

@@ -3,8 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Model\Logs;
+use App\Model\Address;
+use App\Model\Profile;
 use App\Mail\VerifyEmail;
 use App\Model\VerifyUser;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SignUpRequest;
 use Illuminate\Support\Facades\Auth;
@@ -83,6 +87,21 @@ class AuthController extends Controller
 
         ]);
 
+        $address = Address::create([
+            'user_id' => $user->id,
+        ]);
+
+        $profile = Profile::create([
+            'address_id' => $address->id,
+            'user_id' => $user->id,
+        ]);    
+
+        $logs = Logs::create([
+            'action' => 'signup',
+            'details' => 'Sign Up to SARAPP',
+            'user_id' => $user->id
+        ]);
+
         Mail::to($user->email)->send(new VerifyEmail($user));
 
         return response()->json([
@@ -90,6 +109,7 @@ class AuthController extends Controller
             'data' => 'We sent you an activation code. Check your email and click on the link to verify.'
 
             ]);
+
 
      }
 
@@ -187,9 +207,16 @@ class AuthController extends Controller
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
             'user' => auth()->user()->name,
-            'email' => auth()->user()->email
             
         ]);
 
     }
+
+    public function getResetToken() {
+
+        $token = DB::table('password_resets')->get();
+        return response()->json(['data' => $token]);
+        
+    }
+
 }

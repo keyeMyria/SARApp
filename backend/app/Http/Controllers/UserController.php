@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Model\Role;
 use Illuminate\Http\Request;
+use App\Http\Resources\UserResource;
 use App\Http\Resources\User\UserCollection;
 
 class UserController extends Controller
@@ -18,7 +20,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        return UserCollection::collection(User::all()->where('id', auth()->user()->id));
+        $user = User::where('id', auth()->user()->id)->first();
+        if(!$user){
+            return response()->json(['error' => 'Sorry the company you are trying to access doesn\'t exist']);
+        } 
+        return new UserResource($user);
     }
 
     /**

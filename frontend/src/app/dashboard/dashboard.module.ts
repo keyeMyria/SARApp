@@ -5,6 +5,11 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { ProfileComponent } from './profile/profile.component';
 import { OverviewComponent } from './overview/overview.component';
+import { DashboardNavComponent } from './dashboard-nav/dashboard-nav.component';
+import { ScheduleComponent } from './schedule/schedule.component';
+import { SettingsComponent } from './settings/settings.component';
+import { MessagesComponent } from './messages/messages.component';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -13,7 +18,11 @@ import { OverviewComponent } from './overview/overview.component';
   declarations: [
     DashboardComponent,
     ProfileComponent,
-        OverviewComponent
+    OverviewComponent,
+    DashboardNavComponent,
+    ScheduleComponent,
+    SettingsComponent,
+    MessagesComponent
   ]
 })
 export class DashboardModule { }

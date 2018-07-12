@@ -19,6 +19,7 @@ export class VerifyEmailComponent implements OnInit {
     private route : ActivatedRoute,
     private router : Router,
     private __apiService : ApiService
+    
   ) { 
 
     this.route.queryParams.subscribe(params => {
@@ -47,17 +48,13 @@ export class VerifyEmailComponent implements OnInit {
   }
 
   handleResponse(data) {
-    console.log(data);
-    let _router = this.router;
-    _router.navigateByUrl('/login');
-
+    this.router.navigateByUrl('/login');
+    alert(data)
   }
 
   handleError(error){
-    console.log(error);
     this.error = error.error.error;
-    let _router = this.router;
-    _router.navigateByUrl('/login');
+    this.router.navigateByUrl('/login');
 
   }
 
