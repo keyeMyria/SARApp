@@ -32,5 +32,12 @@ export class ApiService {
   getUserData() {
     return this.http.get(`${this.baseUrl}/user`);
   }
+
+  getProfile() {
+    return this.http.get(`${this.baseUrl}/profile`);
+  }
   
+  update(data) {
+    return this.http.post(`${this.baseUrl}/profile`, data);
+  }
 }

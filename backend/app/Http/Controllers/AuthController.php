@@ -47,6 +47,8 @@ class AuthController extends LogsController
             $user->verified = '1';
             $user->save();
 
+            helper::createProfile($user->id);
+            helper::saveActivity('Login', 'Login using '. request('action'));
         }
 
         if($user){

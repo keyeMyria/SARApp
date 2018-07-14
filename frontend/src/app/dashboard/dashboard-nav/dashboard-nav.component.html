@@ -1,43 +1,45 @@
 <div class="row">
     <div class="user-profile">
-
+        <div class="container">
+            <strong>{{name}}</strong>
+        </div>
     </div>
 </div>
 <div class="row">
     <div class="col-lg-12">
         <div class="list-group list-special">
-            <a class="list-group-item list-group-item-action active" routerLink="/dashboard">
+            <a class="list-group-item list-group-item-action sara-font-link" routerLinkActive="bg-info active" [routerLinkActiveOptions]="{exact: true}" routerLink="/dashboard">
 
                 <span class="fa fa-home"></span> 
                 Overview
 
             </a>
-            <a class="list-group-item list-group-item-action" routerLink="profile">
+            <a class="list-group-item list-group-item-action sara-font-link" routerLinkActive="bg-info active" routerLink="profile">
 
                 <span class="fa fa-user"></span> 
                 Profile 
 
             </a>
-            <a class="list-group-item list-group-item-action" routerLink="messages">
+            <a class="list-group-item list-group-item-action sara-font-link" routerLinkActive="bg-info active" routerLink="messages">
 
                 <span class="fa fa-envelope"></span> 
                 Messages 
-                <span class="float-right badge badge-danger">4</span>
+                <span class="float-right badge badge-danger sara-font-link">4</span>
                 
             </a>
-            <a class="list-group-item list-group-item-action" routerLink="schedule">
+            <a class="list-group-item list-group-item-action sara-font-link" routerLinkActive="bg-info active" routerLink="schedule">
 
-                    <span class="fa fa-calendar"></span> 
-                    Schedule 
+                <span class="fa fa-calendar"></span> 
+                Schedule 
 
             </a>
-            <a class="list-group-item list-group-item-action" routerLink="settings">
+            <a class="list-group-item list-group-item-action sara-font-link" routerLinkActive="bg-info active" routerLink="settings">
 
                 <span class="fa fa-gear"></span> 
                 Settings 
 
             </a>
-            <a class="list-group-item list-group-item-action" (click)="logout($event)" href="#">
+            <a class="list-group-item list-group-item-action sara-font-link" (click)="logout($event)" href="#">
 
                 <span class="fa fa-sign-out"></span> 
                 Logout

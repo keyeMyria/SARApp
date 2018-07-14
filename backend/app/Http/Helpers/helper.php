@@ -2,6 +2,7 @@
 
 namespace App\Http\Helpers;
 
+use App\User;
 use App\Model\Log;
 use App\Model\Address;
 use App\Model\Profile;
@@ -46,5 +47,16 @@ class helper {
                 'state' => $addr->state,
                 'zip_code' => $addr->zip_code,
             ];
+      }
+
+      public static function getUser($id) {
+
+            $user = User::where('id', $id)->first();
+
+            return [
+                'name' => $user->name,
+                'email' => $user->email
+            ];
+
       }
 }

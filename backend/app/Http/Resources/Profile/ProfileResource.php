@@ -18,10 +18,12 @@ class ProfileResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'avatar' => $this->avatar,
             'gender' => $this->gender,
             'birthdate' => $this->birthdate,
             'contact' => $this->contact,
-            'address' => helper::getAddress($this->address_id)
+            'address' => helper::getAddress($this->address_id),
+            'user' => helper::getUser($this->user_id)
         ];
     }
 }

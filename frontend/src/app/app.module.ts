@@ -14,6 +14,7 @@ import { PagesModule } from './pages/pages.module';
 import { SharedModule } from './shared/shared.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +31,8 @@ import { DashboardModule } from './dashboard/dashboard.module';
     HttpModule,
     PagesModule,
     SharedModule,
-    DashboardModule
+    DashboardModule,
+
   ],
   providers: [
     {
@@ -38,6 +40,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
       useFactory: getAuthServiceConfigs
     }
   ],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }

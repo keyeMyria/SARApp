@@ -38,6 +38,7 @@ export class AppComponent {
       /** progress ends after 2 seconds */
       this.progress.complete();
       }, 2000);
+      
     this.auth.authStatus.subscribe(
 
       value => this.loggedIn = value

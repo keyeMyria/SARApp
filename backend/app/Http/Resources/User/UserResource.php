@@ -1,8 +1,7 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\User;
 
-use App\Model\Role;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
@@ -15,12 +14,6 @@ class UserResource extends JsonResource
      */
     public function toArray($request)
     {
-
-        return [
-            'id' => $this->id,
-            'name' => $this->name,
-            'email' => $this->email,
-            'role' => Role::find($this->role_id)->first()->name
-        ];
+        return parent::toArray($request);
     }
 }

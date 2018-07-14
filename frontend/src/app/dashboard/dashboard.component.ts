@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../shared/Services/api.service';
+import { TokenService } from '../shared/Services/token.service';
+import { AuthService } from '../shared/Services/auth.service';
+import { Router } from '../../../node_modules/@angular/router';
+import { JwtHelperService } from '../../../node_modules/@auth0/angular-jwt';
 
 declare var jquery:any;
 declare var $ :any;
@@ -11,24 +14,34 @@ declare var $ :any;
 })
 export class DashboardComponent implements OnInit {
 
+  jwtHelper : JwtHelperService = new JwtHelperService();
   constructor(
-    private _service : ApiService,
+    private Token : TokenService,
+    private auth : AuthService,
+    private router : Router,
   ) { }
   ngOnInit() {
-    this._service.getUserData().subscribe(
-      data => this.handleResponse(data)
-    );
+    this.useJWTHelper();
   }
 
   toggle(): void {
     $('#wrapper').toggleClass('toggled');
   }
 
-  public user = {
-    name: null,
-    email: null,
-  }
   handleResponse(data){
-    this.user.name = data.name;
+
+  }
+
+  logout() {
+    this.Token.remove();
+    this.auth.changeAuthStatus(false);
+    this.router.navigateByUrl('/login');
+  }
+
+  useJWTHelper() {
+    var token = sessionStorage.getItem('token');  
+    if(this.jwtHelper.isTokenExpired(token)){
+      this.logout();
+    }
   }
 }

@@ -7,24 +7,21 @@ export class UserService {
 
   constructor() { }
 
+  public name: string;
   handle(user) {
     this.set(user); 
   }
 
   set(user){
-    localStorage.setItem('user', user);
+    this.name = user;
   }
 
   get(){
-    return localStorage.getItem('user');
+    return this.name;
   }
 
   remove(){
-    localStorage.removeItem('user');
-  }
-
-  loggedIn(){
-    return this.get();
+    this.name = null;
   }
 
 }

@@ -7,7 +7,6 @@ import { UserService } from './user.service';
 import { IsLoggedInService } from './is-logged-in.service';
 import { IsLoggedOutService } from './is-logged-out.service';
 
-
 @NgModule({
     imports: [
         CommonModule,
@@ -20,7 +19,7 @@ import { IsLoggedOutService } from './is-logged-out.service';
         TokenService,
         UserService,
         IsLoggedInService,
-        IsLoggedOutService
+        IsLoggedOutService,
     ]
 })
 

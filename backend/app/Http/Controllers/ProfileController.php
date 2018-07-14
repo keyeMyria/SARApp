@@ -40,8 +40,25 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
+
+        if($request->hasFile('file')){
+            
+            $filenameWithExt = $request->file('file')->getClientOriginalName();
+            $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+            
+            $extension = $request->file('file')->getClientOriginalExtension();
+            
+            $fileNameToStore = $filename.'_'.time().'.'.$extension;
+            
+            $path = $request->file('file')->storeAs('public/images', $fileNameToStore);
+
+        }
+
+        
+        
         $profile = Profile::where('user_id', auth()->user()->id)
         ->update([
+            'avatar' => ($request->hasFile('file')) ? $fileNameToStore : Profile::where('user_id', auth()->user()->id)->first()->avatar,
             'gender' => $request->gender,
             'birthdate' => $request->birthdate,
             'contact' => $request->contact,
@@ -52,7 +69,7 @@ class ProfileController extends Controller
             'street' => $request->street,
             'city' => $request->city,
             'state' => $request->state,
-            'zip_code' => $request->zip_code
+            'zip_code' => $request->zip
         ]);
 
         if(!$profile && !$address){
@@ -66,4 +83,5 @@ class ProfileController extends Controller
             'message' => 'Profile Updated!!',
         ]);
     }
+
 }

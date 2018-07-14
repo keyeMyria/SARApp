@@ -13,3 +13,14 @@
     font-family: 'Raleway', sans-serif;
 }
 
+.sara-font-header {
+    font-family: ARBONNIE;
+    font-size: 20pt;
+    color:#FFA726 !important;
+}
+
+.sara-font-link {
+    font-family: ARBONNIE;
+    color:#333 !important;
+    font-weight:bold;
+}

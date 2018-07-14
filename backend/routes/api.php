@@ -19,7 +19,6 @@ Route::group([
     Route::post('/user/verify', 'AuthController@verifyUser');
     Route::apiResource('user', 'UserController');
     Route::apiResource('profile', 'ProfileController');
-    Route::apiResource('address', 'AddressController');
     Route::apiResource('log', 'LogsController');
 
     Route::delete('log/all', 'LogsController@destroyAll');

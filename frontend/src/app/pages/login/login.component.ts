@@ -5,6 +5,7 @@ import { AuthService } from '../../shared/Services/auth.service';
 import { TokenService } from '../../shared/Services/token.service';
 import { ApiService } from '../../shared/Services/api.service';
 import { UserService } from '../../shared/Services/user.service';
+import { TimerService } from '../../shared/Services/timer.service';
 
 
 @Component({
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
     private SocialAuth : SocialAuth,
     private Token : TokenService,
     private __apiService : ApiService,
-    private _user : UserService
+    private _user : UserService,
+    private Timer : TimerService
   ) { }
 
   public form = {
