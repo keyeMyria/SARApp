@@ -3,19 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\User;
-use App\Model\Logs;
-use App\Model\Address;
-use App\Model\Profile;
 use App\Mail\VerifyEmail;
 use App\Model\VerifyUser;
+use App\Http\Helpers\helper;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SignUpRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\LogsController;
 use Symfony\Component\HttpFoundation\Response;
 
-class AuthController extends Controller
+class AuthController extends LogsController
 {
     /**
      * Create a new AuthController instance.
@@ -24,7 +23,7 @@ class AuthController extends Controller
      */
     public function __construct() {
 
-        $this->middleware('auth:api', ['except' => ['login', 'signup', 'verifyUser']]);
+        $this->middleware('auth:api', ['except' => ['login', 'signup', 'verifyUser', 'getResetToken', 'getVerifyToken']]);
 
     }
 
@@ -85,23 +84,17 @@ class AuthController extends Controller
             'user_id' => $user->id,
             'token' => str_random(40)
 
-        ]);
+        ]); 
 
-        $address = Address::create([
-            'user_id' => $user->id,
-        ]);
-
-        $profile = Profile::create([
-            'address_id' => $address->id,
-            'user_id' => $user->id,
-        ]);    
-
-        $logs = Logs::create([
-            'action' => 'signup',
-            'details' => 'Sign Up to SARAPP',
-            'user_id' => $user->id
-        ]);
-
+        if(!$user){
+            return response()->json([
+                'sucess' => false,
+                'message' => 'There is a problem with creating your account'
+            ]);
+        }
+        
+        helper::createProfile($user->id);
+        helper::saveActivity('signup', 'Created an account', $user->id);
         Mail::to($user->email)->send(new VerifyEmail($user));
 
         return response()->json([
@@ -109,8 +102,6 @@ class AuthController extends Controller
             'data' => 'We sent you an activation code. Check your email and click on the link to verify.'
 
             ]);
-
-
      }
 
     /*
@@ -120,7 +111,13 @@ class AuthController extends Controller
 
         $user = User::where('email', request('email'))->first();
         
-        $verifyUser = VerifyUser::where('token', request('token'))->first();
+        $verifyUser = VerifyUser::where('token', request('token'))->where('user_id', $user->id)->first();
+        if(!$verifyUser){
+            return response()->json([
+                    'success' => false,
+                    'message' => 'Invalid Email'
+                ]);
+        }
 
         if(isset($verifyUser)){
 
@@ -217,6 +214,13 @@ class AuthController extends Controller
         $token = DB::table('password_resets')->get();
         return response()->json(['data' => $token]);
         
+    }
+
+    public function getVerifyToken() {
+        
+        $token = DB::table('verify_users')->get();
+        return response()->json(['data' => $token]);
+
     }
 
 }

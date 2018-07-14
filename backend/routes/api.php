@@ -15,9 +15,12 @@ Route::group([
     Route::post('sendPasswordResetLink', 'ResetPasswordController@sendEmail');
     Route::post('resetPassword', 'ChangePasswordController@process');
     Route::get('reset-tokens', 'AuthController@getResetToken');
+    Route::get('verify-tokens', 'AuthController@getVerifyToken');
     Route::post('/user/verify', 'AuthController@verifyUser');
     Route::apiResource('user', 'UserController');
     Route::apiResource('profile', 'ProfileController');
     Route::apiResource('address', 'AddressController');
-    Route::apiResource('logs', 'LogsController');
+    Route::apiResource('log', 'LogsController');
+
+    Route::delete('log/all', 'LogsController@destroyAll');
 });

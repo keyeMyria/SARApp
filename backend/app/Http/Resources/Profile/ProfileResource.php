@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Resources;
+namespace App\Http\Resources\Profile;
 
-use App\User;
-use App\Http\Resources\UserResource;
+
+use App\Http\Helpers\helper;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ProfileResource extends JsonResource
@@ -17,13 +17,11 @@ class ProfileResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'user' => new UserResource(User::where('id', $this->user_id)->first()),
+            'id' => $this->id,
             'gender' => $this->gender,
             'birthdate' => $this->birthdate,
             'contact' => $this->contact,
-            'address' => [
-                'url' => url('http://localhost:8000/api/auth/profile/address', $this->id)
-            ]
+            'address' => helper::getAddress($this->address_id)
         ];
     }
 }

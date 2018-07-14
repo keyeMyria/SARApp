@@ -4,10 +4,10 @@ namespace App\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Logs extends Model
+class Log extends Model
 {
     protected $fillable = [
-        'action', 'details', 'user_id', 'employee_id'
+        'name', 'details', 'user_id'
     ];
 
     public function user() {

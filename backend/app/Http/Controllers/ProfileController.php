@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Address;
 use App\Model\Profile;
 use Illuminate\Http\Request;
-use App\Http\Resources\ProfileResource;
+use App\Http\Resources\Profile\ProfileResource;
+
 
 class ProfileController extends Controller
 {
@@ -23,20 +25,11 @@ class ProfileController extends Controller
         $profile = Profile::where('user_id', auth()->user()->id)->first();
         if(!$profile) {
             return response()->json([
-                'message' => 'Invalid profile'
+                'success' => false,
+                'message' => 'Cant retrieve profile information'
             ]);
         }
         return new ProfileResource($profile);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -47,51 +40,30 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
-    }
+        $profile = Profile::where('user_id', auth()->user()->id)
+        ->update([
+            'gender' => $request->gender,
+            'birthdate' => $request->birthdate,
+            'contact' => $request->contact,
+        ]);
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Model\Profile  $profile
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Profile $profile)
-    {
-        //
-    }
+        $address = Address::where('user_id', auth()->user()->id)
+        ->update([
+            'street' => $request->street,
+            'city' => $request->city,
+            'state' => $request->state,
+            'zip_code' => $request->zip_code
+        ]);
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Model\Profile  $profile
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Profile $profile)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Model\Profile  $profile
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Profile $profile)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Model\Profile  $profile
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Profile $profile)
-    {
-        //
+        if(!$profile && !$address){
+            return response()->json([
+                'success' => false,
+                'message' => 'There must be something wrong with the server or your data are suspicious'
+            ]);
+        }
+        return response()->json([
+            'success' => true,
+            'message' => 'Profile Updated!!',
+        ]);
     }
 }
