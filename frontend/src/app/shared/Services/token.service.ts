@@ -6,27 +6,31 @@ import { Injectable } from '@angular/core';
 export class TokenService {
   private iss = {
     login : 'http://localhost:8000/api/auth/login',
-    register : 'http://localhost:8000/api/auth/register'
+    register : 'http://localhost:8000/api/auth/register',
+    employee : 'http://localhost:8000/api/auth/employee/login'
   }
   constructor() { }
   
-  handle(token) {
-    this.set(token); 
+  handle(token, id) {
+    this.set(token, id); 
   }
 
-  set(token){
-    //localStorage.setItem('token', token);
+  set(token, id){
     sessionStorage.setItem('token', token);
+    sessionStorage.setItem('id', id);
   }
 
   get(){
-    //return localStorage.getItem('token');
     return sessionStorage.getItem('token');
   }
 
+  getRole() {
+    return sessionStorage.getItem('id');
+  }
+
   remove(){
-    //localStorage.removeItem('token');
     sessionStorage.removeItem('token');
+    sessionStorage.removeItem('id');
   }
 
   isValid(){

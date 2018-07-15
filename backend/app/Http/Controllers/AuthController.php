@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Employee;
 use App\Mail\VerifyEmail;
 use App\Model\VerifyUser;
 use App\Http\Helpers\helper;
@@ -12,6 +13,7 @@ use App\Http\Requests\SignUpRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use App\Http\Controllers\LogsController;
+use App\Http\Requests\EmployeeSignUpRequest;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends LogsController
@@ -47,8 +49,8 @@ class AuthController extends LogsController
             $user->verified = '1';
             $user->save();
 
-            helper::createProfile($user->id);
-            helper::saveActivity('Login', 'Login using '. request('action'));
+            helper::createProfile($user->id, 'user');
+            helper::saveActivity('Login', 'Login using '. request('action'), $user->id);
         }
 
         if($user){
@@ -95,7 +97,7 @@ class AuthController extends LogsController
             ]);
         }
         
-        helper::createProfile($user->id);
+        helper::createProfile($user->id, 'user');
         helper::saveActivity('signup', 'Created an account', $user->id);
         Mail::to($user->email)->send(new VerifyEmail($user));
 
@@ -117,7 +119,7 @@ class AuthController extends LogsController
         if(!$verifyUser){
             return response()->json([
                     'success' => false,
-                    'message' => 'Invalid Email'
+                    'message' => 'The token may have been already been expired or verified'
                 ]);
         }
 
@@ -132,14 +134,17 @@ class AuthController extends LogsController
 
                 return response()->json([
 
-                    'data' => "Your e-mail is verified. You can now login."
+                    'success' => true,
+                    'message' => 'Email is now verified you may now login'
 
                 ], Response::HTTP_OK);
 
             } else {
 
                 return response()->json([
-                    'error' => 'Sorry the token sent to  your email has already expired.'
+
+                    'success' => false,
+                    'message' => 'The token may have been already been expired or verified'
 
                 ], Response::HTTP_NOT_FOUND);
 
@@ -205,7 +210,7 @@ class AuthController extends LogsController
             'access_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60,
-            'user' => auth()->user()->name,
+            'role' => auth()->user()->role_id,
             
         ]);
 
@@ -224,5 +229,39 @@ class AuthController extends LogsController
         return response()->json(['data' => $token]);
 
     }
+
+    /*
+     * Get the Request
+     * Validate and Register Employees
+     * 
+     */
+
+    public function addEmployee(EmployeeSignUpRequest $request) {
+
+        $employee = Employee::create([
+            'name' => $request->name,
+            'employee_id' => $request->employee_id,
+            'password' => $request->password,
+            'position' => $request->position,
+            'user_id' => auth()->user()->id  
+        ]);
+        
+        if(!$employee){
+            return response()->json([
+                'sucess' => false,
+                'message' => 'There is a problem with adding an employee'
+            ]);
+        }
+        
+        helper::createProfile($employee->id, 'employee');
+        helper::saveActivity('Added Employee', 'Add Employee', $employee->user_id);
+
+        return response()->json([
+            
+                'sucess' => true,
+                'message' => 'Employee Added'
+
+            ]);
+     }
 
 }

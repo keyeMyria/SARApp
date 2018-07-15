@@ -4,8 +4,6 @@ import { AuthService as SocialAuth, FacebookLoginProvider, GoogleLoginProvider }
 import { AuthService } from '../../shared/Services/auth.service';
 import { TokenService } from '../../shared/Services/token.service';
 import { ApiService } from '../../shared/Services/api.service';
-import { UserService } from '../../shared/Services/user.service';
-import { TimerService } from '../../shared/Services/timer.service';
 
 
 @Component({
@@ -21,20 +19,18 @@ export class LoginComponent implements OnInit {
     private SocialAuth : SocialAuth,
     private Token : TokenService,
     private __apiService : ApiService,
-    private _user : UserService,
-    private Timer : TimerService
   ) { }
 
   public form = {
 
-    email: null,
+    username: null,
     password: null
 
   };
 
-  public employeeForm = {
+  public empForm = {
 
-    employeeID: null,
+    employee_id: null,
     password: null
 
   };
@@ -55,7 +51,6 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-
     this.__apiService.login(this.form).subscribe( 
 
       data => this.handleResponse(data),
@@ -66,6 +61,13 @@ export class LoginComponent implements OnInit {
   }
 
   onEmpSubmit() {
+
+    this.__apiService.empLogin(this.empForm).subscribe( 
+
+      data => this.handleResponse(data),
+      error => this.handleError(error)
+
+    );
 
   }
 
@@ -113,7 +115,7 @@ export class LoginComponent implements OnInit {
   }
 
   handleResponse(data){
-    this.Token.handle(data.access_token);
+    this.Token.handle(data.access_token, data.role);
     this.Auth.changeAuthStatus(true);
     this.router.navigateByUrl('/dashboard');
   }
@@ -121,4 +123,5 @@ export class LoginComponent implements OnInit {
   handleError(error){
     this.error = error.error.error;
   }
+
 }

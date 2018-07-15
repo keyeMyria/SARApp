@@ -17,6 +17,13 @@ Route::group([
     Route::get('reset-tokens', 'AuthController@getResetToken');
     Route::get('verify-tokens', 'AuthController@getVerifyToken');
     Route::post('/user/verify', 'AuthController@verifyUser');
+
+    Route::post('employee/login', 'EmployeeController@login');
+    Route::post('employee/signup', 'AuthController@addEmployee');
+    Route::get('employee', 'EmployeeController@index');
+    Route::get('employee/profile', 'EmployeeController@profile');
+
+    
     Route::apiResource('user', 'UserController');
     Route::apiResource('profile', 'ProfileController');
     Route::apiResource('log', 'LogsController');

@@ -20,10 +20,10 @@ class CreateAddressesTable extends Migration
             $table->string('state')->nullable();
             $table->string('zip_code')->nullable();
             $table->integer('user_id')->unsigned()->nullable();
-            // $table->integer('employee_id')->unsigned()->nullable();
+            $table->integer('employee_id')->unsigned()->nullable();
 
             $table->foreign('user_id')->references('id')->on('users');
-            // $table->foreign('employee_id')->references('id')->on('employees');
+            $table->foreign('employee_id')->references('id')->on('employees');
 
             $table->timestamps();
         });

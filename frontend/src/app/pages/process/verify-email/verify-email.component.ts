@@ -48,8 +48,8 @@ export class VerifyEmailComponent implements OnInit {
   }
 
   handleResponse(data) {
+    alert(data.message);
     this.router.navigateByUrl('/login');
-    alert(data)
   }
 
   handleError(error){

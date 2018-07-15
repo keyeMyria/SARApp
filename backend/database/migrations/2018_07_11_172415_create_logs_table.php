@@ -17,11 +17,11 @@ class CreateLogsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->longText('details');
-            $table->integer('user_id')->unsigned();
-            // $table->integer('employee_id')->unsigned();
+            $table->integer('user_id')->unsigned()->nullable();
+            $table->integer('employee_id')->unsigned()->nullable();
             
             $table->foreign('user_id')->references('id')->on('users');
-            // $table->foreign('employee_id')->references('id')->on('employees');
+            $table->foreign('employee_id')->references('id')->on('employees');
             $table->timestamps();
         });
     }

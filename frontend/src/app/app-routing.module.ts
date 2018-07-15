@@ -8,18 +8,15 @@ import { IsLoggedInService } from './shared/Services/is-logged-in.service';
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { NgProgressHttpModule } from '@ngx-progressbar/http';
 
-// import { ProfileComponent } from './dashboard/user/view/profile/profile.component';
-// import { OverviewComponent } from './dashboard/user/view/overview/overview.component';
-
-
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { VerifyEmailComponent } from './pages/process/verify-email/verify-email.component';
 import { RequestResetComponent } from './pages/process/password/request-reset/request-reset.component';
 import { ResponseResetComponent } from './pages/process/password/response-reset/response-reset.component';
-import { DashboardModule } from './dashboard/dashboard.module';
-// import { DashboardComponent } from './dashboard/user/view/dashboard.component';
+import { DashboardModule } from './dashboard/users/dashboard.module';
+import { NotFoundComponent } from './not-found/not-found.component';
+
 
 const appRoutes: Routes = [
   {
@@ -56,7 +53,10 @@ const appRoutes: Routes = [
     component: ResponseResetComponent,
     canActivate: [IsLoggedOutService]
   },
-  
+  {
+    path: '**',
+    component: NotFoundComponent
+  }
 ];
 
 @NgModule({

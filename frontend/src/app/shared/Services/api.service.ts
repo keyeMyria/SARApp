@@ -40,4 +40,16 @@ export class ApiService {
   update(data) {
     return this.http.post(`${this.baseUrl}/profile`, data);
   }
+
+  empLogin(data) {
+    return this.http.post(`${this.baseUrl}/employee/login`, data);
+  }
+
+  getEmployeeData() {
+    return this.http.get(`${this.baseUrl}/employee`);
+  }
+
+  getEmployeeProfile() {
+    return this.http.get(`${this.baseUrl}/employee/profile`);
+  }
 }

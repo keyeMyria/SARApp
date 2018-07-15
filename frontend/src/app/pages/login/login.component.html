@@ -24,7 +24,7 @@
                   <div class="form-group row">
                     <label for="inputEmail3" class="col-md-4 col-form-label text-md-right">Email</label>
                     <div class="col-md-6">
-                      <input type="email" name="email" class="form-control" id="inputEmail3" placeholder="Email" required [(ngModel)]="form.email">
+                      <input type="email" name="username" class="form-control" id="inputEmail3" placeholder="Email" required [(ngModel)]="form.username">
                     </div>
                     
                   </div>
@@ -60,28 +60,30 @@
           <div class="card">
               <div class="card-header text-center">Employee Login</div>
               <div class="card-body">
+                <div class="alert alert-danger text-center" [hidden]="!error">
+                    {{error}}
+                </div>
                 <form #employeeForm=ngForm (ngSubmit)="onEmpSubmit()">
       
                   <div class="form-group row">
-                    <label for="employeeID" class="col-md-4 col-form-label text-md-right">Employee ID</label>
+                    <label for="inputUsername" class="col-md-4 col-form-label text-md-right">Username</label>
                     <div class="col-md-6">
-                      <input type="text" name="email" class="form-control" id="employeeID" placeholder="Employee ID..." required autofocus [(ngModel)]="employeeForm.employeeID">
+                      <input type="text" name="employee_id" class="form-control" id="inputUsername" placeholder="Employee ID..." required autofocus [(ngModel)]="empForm.employee_id">
                     </div>
                     
                   </div>
       
       
                   <div class="form-group row">
-                    <label for="employeePassword" class="col-md-4 col-form-label text-md-right">Password</label>
+                    <label for="inputPassword4" class="col-md-4 col-form-label text-md-right">Password</label>
                     <div class="col-md-6">
-                      <input type="password" name="password" class="form-control" id="employeePassword" placeholder="Password" required [(ngModel)]="employeeForm.password">
+                      <input type="password" name="password" class="form-control" id="inputPassword4" placeholder="Password" required [(ngModel)]="empForm.password">
                     </div>
                   </div>
       
                   <div class="form-group row mb-0">
                     <div class="col-md-8 offset-md-4">
                       <button type="submit" class="btn btn-primary" [disabled]="!employeeForm.valid">Login</button>
-                      <!-- <a class="btn btn-link" href="#"> Forgot Password</a> -->
                     </div>
                   </div>
       

@@ -21,4 +21,16 @@ class Role extends Model
         return $this->hasMany('App\User');
 
     }
+
+    public function employee() {
+
+        return $this->belongsTo('App\Employee');
+
+    }
+
+    public function employees() {
+
+        return $this->hasMany('App\Employee');
+
+    }
 }

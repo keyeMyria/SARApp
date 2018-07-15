@@ -23,7 +23,7 @@ class ProfileResource extends JsonResource
             'birthdate' => $this->birthdate,
             'contact' => $this->contact,
             'address' => helper::getAddress($this->address_id),
-            'user' => helper::getUser($this->user_id)
+            'user' => ($this->user_id) ? helper::getUser($this->user_id, 'user') : helper::getUser($this->employee_id, 'employee')
         ];
     }
 }

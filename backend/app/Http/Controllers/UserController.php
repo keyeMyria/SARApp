@@ -20,9 +20,10 @@ class UserController extends Controller
      */
     public function index()
     {
+
         $user = User::where('id', auth()->user()->id)->first();
         if(!$user){
-            return response()->json(['error' => 'Sorry the company you are trying to access doesn\'t exist']);
+            return response()->json(['error' => 'Sorry the user you are trying to access doesn\'t exist']);
         } 
         return new UserResource($user);
     }

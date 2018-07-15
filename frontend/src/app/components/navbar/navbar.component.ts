@@ -3,9 +3,6 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../shared/Services/auth.service';
 import { TokenService } from '../../shared/Services/token.service';
 import { UserService } from 'src/app/shared/Services/user.service';
-// import { AuthService } from '../../Services/auth.service';
-// import { TokenService } from '../../Services/token.service';
-// import { UserService } from '../../Services/user.service';
 
 @Component({
   selector: 'app-navbar',
