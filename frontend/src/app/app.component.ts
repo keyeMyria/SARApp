@@ -16,7 +16,7 @@ import { NgProgress } from '@ngx-progressbar/core';
   styles: [],
 })
 export class AppComponent {
-
+  
   public loggedIn : boolean;
 
   constructor(

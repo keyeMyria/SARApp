@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../shared/Services/auth.service';
 import { TokenService } from '../../shared/Services/token.service';
 import { UserService } from 'src/app/shared/Services/user.service';
+import { NavService } from '../../shared/Services/nav.service';
 
 @Component({
   selector: 'app-navbar',
@@ -17,7 +18,8 @@ export class NavbarComponent implements OnInit {
     private auth: AuthService,
     private Token: TokenService,
     private router: Router,
-    private UserService: UserService
+    private UserService: UserService,
+    private nav: NavService
   ) { }
 
   ngOnInit() {

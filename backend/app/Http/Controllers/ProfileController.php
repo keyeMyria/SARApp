@@ -13,11 +13,8 @@ class ProfileController extends Controller
 {
     public function __construct() {
 
-        $this->middleware('auth:api')->except('store');
+        $this->middleware('auth:api');
         
-        $this->middleware('auth:employee', ['only' => [
-            'store'
-        ]]);
     }
     /**
      * Display a listing of the resource.

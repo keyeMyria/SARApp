@@ -1,16 +1,174 @@
-<div id="wrapper">
-    <div id="sidebar-wrapper">
-        <app-dashboard-nav></app-dashboard-nav>
-    </div>
-    <div id="page-content-wrapper">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <button class="btn btn-outline-warning" id="menu-toggle" (click)="toggle()"><span class="fa fa-navicon" id="toggle-icon"></span></button>
-                </div>
+<div class="wrapper">
+    <div class="sidebar" data-color="blue">
+        <div class="sidebar-wrapper">
+            <div class="logo">
+                <a href="#" class="simple-text">
+                    SARApp
+                </a>
             </div>
-            <router-outlet></router-outlet>
+            <ul class="nav">
+                <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                    <a class="nav-link" routerLink="/dashboard">
+                        <i class="nc-icon nc-chart-pie-35"></i>
+                        <p>Dashboard</p>
+                    </a>
+                </li>
+                <li class="nav-item" routerLinkActive="active">
+                    <a class="nav-link" routerLink="profile">
+                        <i class="fa fa-user"></i>
+                        <p>User Profile</p>
+                    </a>
+                </li>
+                <li class="nav-item" routerLinkActive="active">
+                    <a class="nav-link" routerLink="employee">
+                        <i class="fa fa-users"></i>
+                        <p>Employess</p>
+                    </a>
+                </li>
+                <li class="nav-item" routerLinkActive="active">
+                    <a class="nav-link" routerLink="schedule">
+                        <i class="fa fa-calendar"></i>
+                        <p>Schedule</p>
+                    </a>
+                </li>
+                <li class="nav-item" routerLinkActive="active">
+                    <a class="nav-link" routerLink="settings">
+                        <i class="fa fa-gear"></i>
+                        <p>Settings</p>
+                    </a>
+                </li>
+            </ul>
         </div>
     </div>
-</div>
+    <div class="main-panel">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light dual-collapse2" color-on-scroll="500">
+            <div class="container-fluid ">
+                <a class="navbar-brand" routerLink="/dashboard"> Dashboard </a>
+                <button href="#" class="navbar-toggler navbar-toggler-right" (click)="toggle()" type="button" data-toggle="collapse" aria-controls="navigation" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-bar burger-lines"></span>
+                    <span class="navbar-toggler-bar burger-lines"></span>
+                    <span class="navbar-toggler-bar burger-lines"></span>
+                </button>
+                <div class="navbar-collapse collapse" id="navigation">
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link" data-toggle="dropdown">
+                                <span class="d-lg-none">Dashboard</span>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nc-icon nc-zoom-split"></i>
+                                <span class="d-lg-block">&nbsp;Search</span>
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                <i class="fa fa-bell"></i>
+                                <span class="notification">5</span>
+                                <span class="d-lg-none">Notification</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="#">Notification 1</a>
+                                <a class="dropdown-item" href="#">Notification 2</a>
+                                <a class="dropdown-item" href="#">Notification 3</a>
+                                <a class="dropdown-item" href="#">Notification 4</a>
+                                <a class="dropdown-item" href="#">Another notification</a>
+                            </ul>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                                <span class="d-lg-block">{{name}}</span>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" routerLink="profile">View Profile</a>
+                                <a class="dropdown-item" href="#" (click)="logout($event)">Logout</a>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <nav class="navbar d-lg-none" style="height:40px;">
+            <ul class="nav navbar" style="list-style:inline-block;">
+                <li class="dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                        <strong><i class="fa fa-search"></i></strong> 
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li class="dropdown-item"> <input type="search" name="" id="" class="form-control" placehodler="type here...">
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">
+                        <strong><i class="fa fa-bell"></i></strong> 
+                    </a>
+                    <ul class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Notification 1</a>
+                        <a class="dropdown-item" href="#">Notification 2</a>
+                        <a class="dropdown-item" href="#">Notification 3</a>
+                        <a class="dropdown-item" href="#">Notification 4</a>
+                        <a class="dropdown-item" href="#">Another notification</a>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown"href="#">
+                        <strong><i class="fa fa-user-circle"></i></strong> 
+                    </a>
+                    <ul class="dropdown-menu">
+                        <a class="dropdown-item" routerLink="profile">View Profile</a>
+                        <a class="dropdown-item" href="#" (click)="logout($event)">Logout</a>
+                    </ul>
+                </li>
+               
+            </ul>
+        </nav>
+        <div class="content">
+            <div class="container-fluid">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="container">
+                <nav>
+                    <ul class="footer-menu">
+                        <li>
+                            <a routerLink="">
+                                Home
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#about">
+                                About
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#services">
+                                Services
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#team">
+                                Team
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#contact">
+                                Contact
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-center">
+                        &copy;
+                             2018
 
+                        <a href="#">SARApp</a>, made to help you.
+                    </p>
+                </nav>
+            </div>
+        </footer>
+    </div>
+</div>

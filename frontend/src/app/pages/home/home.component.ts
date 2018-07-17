@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NavService } from '../../shared/Services/nav.service';
 
 @Component({
   selector: 'app-home',
@@ -6,10 +7,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
-  constructor() { }
+  title = "SARApp";
+  constructor(private nav : NavService) { }
 
   ngOnInit() {
+    this.nav.show();
+    this.nav.hideHome();
   }
 
 }

@@ -11,9 +11,9 @@ import { NgProgressHttpModule } from '@ngx-progressbar/http';
 import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { VerifyEmailComponent } from './pages/process/verify-email/verify-email.component';
-import { RequestResetComponent } from './pages/process/password/request-reset/request-reset.component';
-import { ResponseResetComponent } from './pages/process/password/response-reset/response-reset.component';
+import { VerifyEmailComponent } from './pages/verify-email/verify-email.component';
+import { RequestResetComponent } from './pages/password/request-reset/request-reset.component';
+import { ResponseResetComponent } from './pages/password/response-reset/response-reset.component';
 import { DashboardModule } from './dashboard/users/dashboard.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 
@@ -39,11 +39,6 @@ const appRoutes: Routes = [
     canActivate: [IsLoggedOutService]
   },
   {
-    path: 'dashboard',
-    loadChildren: () => DashboardModule,
-    canActivate: [IsLoggedInService]
-  },
-  {
     path: 'request-password-reset',
     component: RequestResetComponent,
     canActivate: [IsLoggedOutService]
@@ -52,6 +47,11 @@ const appRoutes: Routes = [
     path: 'response-password-reset',
     component: ResponseResetComponent,
     canActivate: [IsLoggedOutService]
+  },
+  {
+    path: 'dashboard',
+    loadChildren: () => DashboardModule,
+    canActivate: [IsLoggedInService]
   },
   {
     path: '**',

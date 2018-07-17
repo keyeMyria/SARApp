@@ -4,6 +4,7 @@ import { AuthService as SocialAuth, FacebookLoginProvider, GoogleLoginProvider }
 import { AuthService } from '../../shared/Services/auth.service';
 import { TokenService } from '../../shared/Services/token.service';
 import { ApiService } from '../../shared/Services/api.service';
+import { NavService } from '../../shared/Services/nav.service';
 
 
 @Component({
@@ -19,11 +20,12 @@ export class LoginComponent implements OnInit {
     private SocialAuth : SocialAuth,
     private Token : TokenService,
     private __apiService : ApiService,
+    private nav : NavService
   ) { }
 
   public form = {
 
-    username: null,
+    email: null,
     password: null
 
   };
@@ -47,10 +49,12 @@ export class LoginComponent implements OnInit {
   public error = null;
 
   ngOnInit() {
-    
+    this.nav.show();
+    this.nav.showHome();
   }
 
   onSubmit() {
+
     this.__apiService.login(this.form).subscribe( 
 
       data => this.handleResponse(data),

@@ -1,3 +1,7 @@
+@import '../../../assets/css/light-bootstrap-dashboard.css';
+/* #wrapper {
+  margin-top: 70px;
+}
 #sidebar-wrapper {
   overflow-y: hidden;
   opacity: 0.9;
@@ -21,5 +25,5 @@
 
 #wrapper.toggled #page-content-wrapper {
   padding-left: 15px;
-}
+} */
 

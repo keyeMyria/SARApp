@@ -8,6 +8,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { SettingsComponent } from './settings/settings.component';
 import { MessagesComponent } from './messages/messages.component';
 import { MyscheduleComponent } from './myschedule/myschedule.component';
+import { EmployeeComponent } from './employee/employee.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,10 @@ const routes: Routes = [
       {
         path: 'myschedule',
         component: MyscheduleComponent
+      },
+      {
+        path: 'employee',
+        component: EmployeeComponent
       }
     ]
   }

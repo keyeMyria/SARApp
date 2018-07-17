@@ -1,106 +1,45 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-dark sticky-top">
-
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" *ngIf="nav.visible">
         
-        <a class="navbar-brand sara-font" href="#">SARApp</a>
+    <a class="navbar-brand" href="#">SARApp</a>
 
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-            aria-expanded="false" aria-label="Toggle navigation" (click)="isCollapsed = !isCollapsed">
-            <i class="fa fa-navicon"></i>
-        </button>
-      
-        <div class="navbar-collapse collapse w-100 order-3 dual-collapse2" id="navbarNavAltMarkup" [attr.aria-expanded]="isCollapsed" [ngClass]="{collapse: !isCollapsed}">
-      
-            <ul class="navbar-nav ml-auto" (click)="isCollapsed = !isCollapsed">
-      
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">About</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Services</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Team</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contact</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="login" *ngIf="!loggedIn" routerLinkActive="active">Sign In</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" routerLink="register" *ngIf="!loggedIn" routerLinkActive="active">Sign Up</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link" routerLink="dashboard" *ngIf="loggedIn" routerLinkActive="active">Dashboard</a>
-                </li>
-            </ul>
-        </div>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
+        aria-expanded="false" aria-label="Toggle navigation" (click)="isCollapsed = !isCollapsed">
+        <i class="fa fa-navicon"></i>
+    </button>
 
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2" id="navbarNavAltMarkup" [attr.aria-expanded]="isCollapsed" [ngClass]="{collapse: !isCollapsed}">
 
-        <!-- <div class="dropdown d-lg-none d-xl-none" *ngIf="loggedIn">
-            <a href="#" id="account" class="nav-link dropdown-toggle" data-toggle="dropdown" id="dropdownMenu2" *ngIf="loggedIn" aria-haspopup="true" aria-expanded="false">Account<span class="caret"></span></a>
-            <div class="dropdown-menu dropdown-menu-right animated slideInRight" aria-labelledby="dropdownMenu2">
-                <div class="dropdown-item">
-                    <div class="account-info">
-                        <div class="container-fluid">
-                            <div class="row profile">
-                                <div class="col-md-12">
-                                    <div class="profile-sidebar">
-                                        <div class="profile-userpic text-center">
-                                            <img src="assets/profile_pictures/user.png" class="img-responsive" alt="">
-                                        </div>
-                                        <div class="profile-usertitle">
-                                            <div class="profile-usertitle-name">
-                                                {{name}}
-                                            </div>
-                                            <div class="profile-usertitle-job">
-                                                Email Here
-                                            </div>
-                                        </div>
-                                        <div class="profile-userbuttons">
-                                            <button type="button" class="btn btn-success btn-sm">Follow</button>
-                                            <button type="button" class="btn btn-danger btn-sm">Message <span class="badge badge-light">4</span></button>
-                                        </div>
-                                        <div class="profile-usermenu">
-                                            <ul class="list-group list-group-flush">
-                                                <a href="#">
-                                                    <li class="list-group-item">
-                                                        <i class="fa fa-home"></i>
-                                                        Home
-                                                    </li>
-                                                </a>
-                                                <a href="#">
-                                                    <li class="list-group-item">
-                                                        <i class="fa fa-user-circle-o"></i>
-                                                        My Profile
-                                                    </li>
-                                                </a>
-                                                <a href="#">
-                                                    <li class="list-group-item">
-                                                        
-                                                        <i class="fa fa-gear"></i>
-                                                        Account Settings 
-                                                    </li>
-                                                </a>
-                                                <a href="#" (click)="logout($event)">
-                                                    <li class="list-group-item">
-                                                        
-                                                        <i class="fa fa-sign-out"></i>
-                                                        Logout 
-                                                    </li>
-                                                </a>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div> -->
+        <ul class="navbar-nav ml-auto" (click)="isCollapsed = !isCollapsed">
 
-      </nav>
+            <li class="nav-item" *ngIf="nav.home">
+                <a class="nav-link" routerLink="" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a>
+            </li>
+            <li class="nav-item" *ngIf="!nav.home">
+                <a class="nav-link" href="#home">Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#about">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#services">Services</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#team">Team</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#contact">Contact</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="login" *ngIf="!loggedIn" routerLinkActive="active">Sign In</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" routerLink="register" *ngIf="!loggedIn" routerLinkActive="active">Sign Up</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link" routerLink="dashboard" *ngIf="loggedIn" routerLinkActive="active">Dashboard</a>
+            </li>
+            
+        </ul>
+
+    </div>
+</nav>
