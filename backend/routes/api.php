@@ -29,4 +29,6 @@ Route::group([
     Route::apiResource('log', 'LogsController');
 
     Route::delete('log/all', 'LogsController@destroyAll');
+
+    Route::get('all', 'AllController@all');
 });

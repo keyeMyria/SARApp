@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../../../shared/Services/auth.service';
 
 @Component({
   selector: 'app-employee',
@@ -6,10 +7,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./employee.component.css']
 })
 export class EmployeeComponent implements OnInit {
+  public employees;
+  constructor(
 
-  constructor() { }
+    private auth : AuthService,
+
+  ) { }
 
   ngOnInit() {
+     // a service that observes any changes with the users data
+     this.auth.currentData.subscribe(data => this.handleResponse(data));
+  }
+
+  handleResponse(data) {
+    this.employees = data.data.employees;
   }
 
 }

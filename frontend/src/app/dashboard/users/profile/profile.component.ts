@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../../../shared/Services/api.service';
 import { TokenService } from '../../../shared/Services/token.service';
+import { UserService } from '../../../shared/Services/user.service';
+import { AuthService } from '../../../shared/Services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -12,8 +14,10 @@ export class ProfileComponent implements OnInit {
   form: boolean = false;
   selectedFile: File = null;
   constructor(
-    private _user : ApiService,
-    private Token : TokenService
+    private _service : ApiService,
+    private Token : TokenService,
+    private _user : UserService,
+    private auth : AuthService
   ) { }
 
   public role: string = null;
@@ -29,31 +33,23 @@ export class ProfileComponent implements OnInit {
     avatar: null,
     image: null
   };
-  
+
   ngOnInit() {
-    if(this.Token.getRole() == '2') {
-      this._user.getProfile().subscribe(
-        data => this.handleResponse(data),
-        error => this.handleError(error)
-      );
-    } else if(this.Token.getRole() == '3') {
-      this._user.getEmployeeProfile().subscribe(
-        data => this.handleResponse(data)
-      );
-    }
+     // a service that observes any changes with the users data
+     this.auth.currentData.subscribe(data => this.handleResponse(data));
   }
 
   handleResponse(data){
     this.profile.image = "http://localhost:8000/storage/images/" + data.data.avatar;
-    this.profile.name = data.data.user.name;
+    this.profile.name = data.data.name;
     this.profile.gender = data.data.gender;
     this.profile.birthdate = data.data.birthdate;
     this.profile.contact = data.data.contact;
-    this.profile.street = data.data.address.street;
-    this.profile.city = data.data.address.city;
-    this.profile.state = data.data.address.state;
-    this.profile.zip = data.data.address.zip_code;
-    this.role = data.data.user.role;
+    this.profile.street = data.data.street;
+    this.profile.city = data.data.city;
+    this.profile.state = data.data.state;
+    this.profile.zip = data.data.zip_code;
+    this.role = data.data.role_id;
   }
 
   handleError(error){
@@ -90,7 +86,7 @@ export class ProfileComponent implements OnInit {
     else if(this.role == '3')
       fd.append('role', this.role)
 
-    this._user.update(fd).subscribe(
+    this._service.update(fd).subscribe(
       data => {
         this.handleResponseEditProfile(data);
       }

@@ -52,4 +52,8 @@ export class ApiService {
   getEmployeeProfile() {
     return this.http.get(`${this.baseUrl}/employee/profile`);
   }
+
+  getAll() {
+    return this.http.get(`${this.baseUrl}/all`);
+  }
 }

@@ -10,33 +10,27 @@ import { ApiService } from '../../../shared/Services/api.service';
   styleUrls: ['./overview.component.css']
 })
 export class OverviewComponent implements OnInit {
+  public role:number;
+  public employees;
   constructor(
-    private Token : TokenService,
+
     private auth : AuthService,
-    private router : Router,
-    private _user : ApiService
+
   ) { }
-  public role: number;
 
   ngOnInit() {
-    if(this.Token.getRole() == '2') {
-      this._user.getUserData().subscribe(
-        data => this.handleResponse(data),
-        error => this.handleError(error)
-      );
-    } else if(this.Token.getRole() == '3') {
-      this._user.getEmployeeData().subscribe(
-        data => this.handleResponse(data)
-      );
-    }
+
+     // a service that observes any changes with the users data
+    this.auth.currentData.subscribe(data => this.handleResponse(data));
+
   }
 
+  /**
+   * handles assigning value to role
+   */
   handleResponse(data) {
+    console.log(data);
     this.role = data.data.role_id;
+    this.employees = data.data.employees;
   }
-
-  handleError(error) {
-    console.log(error.error.error);
-  }
-
 }

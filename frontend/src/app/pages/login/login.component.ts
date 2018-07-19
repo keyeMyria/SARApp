@@ -5,7 +5,8 @@ import { AuthService } from '../../shared/Services/auth.service';
 import { TokenService } from '../../shared/Services/token.service';
 import { ApiService } from '../../shared/Services/api.service';
 import { NavService } from '../../shared/Services/nav.service';
-
+import { UserService } from '../../shared/Services/user.service';
+declare var demo : any;
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
     private SocialAuth : SocialAuth,
     private Token : TokenService,
     private __apiService : ApiService,
-    private nav : NavService
+    private nav : NavService,
+    private user : UserService
   ) { }
 
   public form = {
@@ -119,8 +121,13 @@ export class LoginComponent implements OnInit {
   }
 
   handleResponse(data){
-    this.Token.handle(data.access_token, data.role);
+    this.Token.handle(data.access_token);
     this.Auth.changeAuthStatus(true);
+    this.__apiService.getAll().subscribe(
+      data => this.user.handle(data),
+      error => this.handleError(error)
+    );
+    demo.showNotification('top', 'left', 'Welcome to SARApp');
     this.router.navigateByUrl('/dashboard');
   }
 

@@ -7,21 +7,19 @@ export class UserService {
 
   constructor() { }
 
-  public name: string;
-  handle(user) {
-    this.set(user); 
+  handle(data) {
+    this.set(data);
   }
 
-  set(user){
-    this.name = user;
+  set(data) {
+    sessionStorage.setItem('current_user', JSON.stringify(data));
   }
 
-  get(){
-    return this.name;
+  get() {
+    return sessionStorage.getItem('current_user');
   }
 
-  remove(){
-    this.name = null;
+  remove() {
+    sessionStorage.removeItem('current_user');
   }
-
 }

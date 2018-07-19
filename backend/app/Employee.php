@@ -81,4 +81,10 @@ class Employee extends Authenticatable implements JWTSubject
         return $this->hasMany('App\Model\Log');
 
     }
+
+    public function address() {
+        
+        return $this->hasOne('App\Model\Address');
+
+    }
 }

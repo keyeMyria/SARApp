@@ -11,26 +11,20 @@ export class TokenService {
   }
   constructor() { }
   
-  handle(token, id) {
-    this.set(token, id); 
+  handle(token) {
+    this.set(token); 
   }
 
-  set(token, id){
+  set(token){
     sessionStorage.setItem('token', token);
-    sessionStorage.setItem('id', id);
   }
 
   get(){
     return sessionStorage.getItem('token');
   }
 
-  getRole() {
-    return sessionStorage.getItem('id');
-  }
-
   remove(){
     sessionStorage.removeItem('token');
-    sessionStorage.removeItem('id');
   }
 
   isValid(){

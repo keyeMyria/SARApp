@@ -14,7 +14,16 @@
         <div class="card">
             <div class="card-header text-white sara-font-header bg-info">Employees</div>
             <div class="card-body">
-                
+                <table class="table">
+                    <thead>
+                        <th>Name</th>
+                    </thead>
+                    <tbody *ngFor="let employee of employees">
+                        <tr>
+                            <td>{{employee.name}}</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
